@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | SecureVault</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">My Vault</h1>
+      <a href="/logout" class="btn btn-danger">Sign Out</a>
+    </div>
+
+    <!-- Plan Status -->
+    <% if (role === "free") { %>
+      <div class="plan-badge">
+        ⚡ Free Plan: <%= passwords.length %>/5 passwords used
+      </div>
+    <% } %>
+
+    <!-- Add Password Form -->
+    <div class="add-password-card">
+      <h3>Add New Password</h3>
+      <form method="POST" action="/add">
+        <div class="form-grid">
+          <input 
+            name="service" 
+            placeholder="Service (e.g., Gmail, Netflix)" 
+            class="form-input" 
+            required
+          >
+          <input 
+            name="username" 
+            placeholder="Username or Email" 
+            class="form-input" 
+            required
+          >
+          <input 
+            name="password" 
+            type="password"
+            placeholder="Password" 
+            class="form-input" 
+            required
+          >
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          Save Password Securely
+        </button>
+      </form>
+    </div>
+
+    <!-- Password List -->
+    <div class="passwords-section">
+      <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 600;">
+        Saved Passwords (<%= passwords.length %>)
+      </h3>
+      
+      <% if (passwords.length === 0) { %>
+        <div class="empty-state">
+          <p>No passwords saved yet.</p>
+          <p style="font-size: 0.875rem; margin-top: 0.5rem;">Add your first password above to get started.</p>
+        </div>
+      <% } else { %>
+        <div class="passwords-grid">
+          <% passwords.forEach(password => { %>
+            <div class="password-card">
+              <h4><%= password.service %></h4>
+              <p><strong>Username:</strong> <%= password.username %></p>
+              <p style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
+                Password encrypted and secured
+              </p>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

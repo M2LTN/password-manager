@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | SecureVault</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="welcome-container">
+    <div class="welcome-card" style="max-width: 400px;">
+      <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h1>
+      <p class="subtitle" style="margin-bottom: 2rem;">
+        Sign in to access your secure vault
+      </p>
+      
+      <form method="POST" action="/login" style="text-align: left;">
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-secondary);">
+            Email Address
+          </label>
+          <input 
+            name="email" 
+            type="email" 
+            class="form-input" 
+            placeholder="you@example.com" 
+            required
+          >
+        </div>
+        
+        <div style="margin-bottom: 2rem;">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-secondary);">
+            Password
+          </label>
+          <input 
+            name="password" 
+            type="password" 
+            class="form-input" 
+            placeholder="Enter your password" 
+            required
+          >
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-full" style="margin-bottom: 1.5rem;">
+          Sign In Securely
+        </button>
+      </form>
+      
+      <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem;">
+        Don't have an account? 
+        <a href="/register" style="color: var(--accent-teal); text-decoration: none; font-weight: 500;">
+          Create one here
+        </a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
