@@ -1,0 +1,72 @@
+const express = require("express");
+const router = express.Router();
+const db = require("../config/db");
+const { encrypt, decrypt } = require("../config/encryption");
+const { requireLogin } = require("../middleware/auth");
+
+// Dashboard
+router.get("/dashboard", requireLogin, (req, res) => {
+  db.query("SELECT id, service, username, password FROM passwords WHERE user_id = ?", [req.session.userId], (err, results) => {
+    if (err) throw err;
+    const decryptedResults = results.map(p => ({
+      ...p,
+      password: decrypt(p.password),
+    }));
+    res.render("index", { passwords: decryptedResults, role: req.session.role });
+  });
+});
+
+// Add
+router.post("/add", requireLogin, (req, res) => {
+  const { service, username, password } = req.body;
+  const encrypted = encrypt(password);
+
+  db.query("INSERT INTO passwords (service, username, password, user_id) VALUES (?, ?, ?, ?)",
+    [service, username, encrypted, req.session.userId],
+    (err) => {
+      if (err) throw err;
+      res.redirect("/dashboard");
+    });
+});
+
+// Edit
+router.get("/edit/:id", requireLogin, (req, res) => {
+  const id = req.params.id;
+  db.query(
+    "SELECT * FROM passwords WHERE id = ? AND user_id = ?",
+    [id, req.session.userId],
+    (err, results) => {
+      if (err) throw err;
+      if (!results.length) return res.redirect("/dashboard");
+
+      const decryptedPassword = decrypt(results[0].password);
+      res.render("edit", {
+        password: { ...results[0], password: decryptedPassword },
+        role: req.session.role,
+      });
+    }
+  );
+});
+
+router.post("/edit/:id", requireLogin, (req, res) => {
+  const id = req.params.id;
+  const { service, username, password } = req.body;
+  const encrypted = encrypt(password);
+
+  db.query("UPDATE passwords SET service=?, username=?, password=? WHERE id=? AND user_id=?",
+    [service, username, encrypted, id, req.session.userId],
+    (err) => {
+      if (err) throw err;
+      res.redirect("/dashboard");
+    });
+});
+
+// Delete
+router.post("/delete/:id", requireLogin, (req, res) => {
+  db.query("DELETE FROM passwords WHERE id=? AND user_id=?", [req.params.id, req.session.userId], (err) => {
+    if (err) throw err;
+    res.redirect("/dashboard");
+  });
+});
+
+module.exports = router;

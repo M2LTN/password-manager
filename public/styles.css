@@ -269,10 +269,16 @@ body {
   border-color: var(--danger);
 }
 
-.btn-full {
-  width: 100%;
+.btn-warning {
+  background: rgba(23, 161, 189, 0.1);
+  color: rgb(6, 151, 255);
+  border: 1px solid rgb(39, 100, 255);
 }
 
+.btn-warning:hover {
+  background: rgba(6, 176, 255, 0.249);
+  border-color: rgb(0, 72, 255);
+}
 /* Form Styles */
 .form-input {
   width: 100%;
