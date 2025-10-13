@@ -35,6 +35,10 @@ body {
   min-height: 100vh;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Welcome Page Styles */
 .welcome-container {
   min-height: 100vh;
@@ -241,6 +245,15 @@ body {
   color: white;
 }
 
+.btn-back {
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+  position: fixed;         /* stay in place while scrolling */
+  top: 1.5rem;                /* vertically centered */
+  left: 1.5rem;            /* distance from the left edge */
+  z-index: 1000;           /* keep it above everything */
+  padding: 0.75rem 1.25rem;
+  color: white;
+}
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 20px rgba(8, 145, 178, 0.3);
@@ -279,6 +292,80 @@ body {
   background: rgba(6, 176, 255, 0.249);
   border-color: rgb(0, 72, 255);
 }
+
+/* Pricing / Plans Page */
+.plans-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.plans-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.plan-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-teal);
+}
+
+.plan-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.plan-price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--accent-blue);
+}
+
+.plan-price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.plan-features {
+  list-style: none;
+  text-align: left;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  max-width: 250px;
+  color: var(--text-secondary);
+}
+
+.plan-features li {
+  margin-bottom: 0.75rem;
+}
+
+.plan-featured {
+  border: 2px solid var(--accent-blue);
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.1);
+  transform: scale(1.03);
+}
+
 /* Form Styles */
 .form-input {
   width: 100%;
@@ -336,6 +423,17 @@ body {
   color: var(--accent-blue);
 }
 
+.btn-plan {
+  background: linear-gradient(135deg, var(--warning), #ffdb0f);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+  transition: background 0.2s ease;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .welcome-card {
