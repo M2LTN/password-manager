@@ -434,6 +434,7 @@ html {
   display: inline-block;
   transition: background 0.2s ease;
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .welcome-card {

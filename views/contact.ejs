@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | SecureVault</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .contact-section {
+      max-width: 900px;
+      margin: 3rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .contact-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 2rem;
+      flex: 1 1 380px;
+    }
+    .contact-card h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    .contact-item {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .contact-item strong {
+      display: inline-block;
+      width: 90px;
+      color: var(--text-secondary);
+    }
+    .form-input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      background-color: #f9f9f9;
+    }
+    textarea { resize: vertical; min-height: 120px; }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">Contact Us</h1>
+      <a href="/" class="btn btn-secondary">Go Back</a>
+    </div>
+
+    <section class="contact-section">
+      <!-- Contact Info -->
+      <div class="contact-card">
+        <h2>Get in Touch</h2>
+        <p style="margin-bottom: 1.5rem;">
+          Have questions, feedback, or partnership inquiries?  
+          Our team would love to hear from you.
+        </p>
+        <div class="contact-item"><strong>Email:</strong> qwerty@qwerty.com </div>
+        <div class="contact-item"><strong>Phone:</strong> +372 1234 1234 </div>
+        <div class="contact-item"><strong>Address:</strong> Kopli 1c </div>
+        <div class="contact-item"><strong>Hours:</strong> Mon–Fri, 9–17 UTC</div>
+      </div>
+
+      <!-- Message Form -->
+      <div class="contact-card">
+        <h2>Send a Message</h2>
+        <form method="POST" action="/send-message">
+          <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+          <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message..." required></textarea>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
