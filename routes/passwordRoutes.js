@@ -11,10 +11,12 @@ router.get("/dashboard", requireLogin, (req, res) => {
     const decryptedResults = results.map(p => ({
       ...p,
       password: decrypt(p.password),
+      
     }));
     res.render("index", { passwords: decryptedResults, role: req.session.role });
   });
 });
+
 
 // Add
 router.post("/add", requireLogin, (req, res) => {

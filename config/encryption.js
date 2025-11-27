@@ -22,9 +22,9 @@ function decrypt(text) {
     let decrypted = decipher.update(encryptedData, "hex", "utf8");
     decrypted += decipher.final("utf8");
     return decrypted;
-  } catch {
-    return "••••••••";
-  }
-}
+  } catch (error) {
+    console.error("Decryption failed:", error);
+    return null;
+  }}
 
 module.exports = { encrypt, decrypt };

@@ -59,16 +59,14 @@
               <div id="details-<%= pw.id %>" class="password-details" style="margin-top:1rem;">
                 <div style="display:flex;align-items:center;gap:.5rem;">
                   <strong>Password:</strong>
-                  <!-- store the real password URL-encoded to avoid quote issues -->
-                  <span id="pw-<%= pw.id %>" class="pw" data-actual="<%= encodeURIComponent(pw.password) %>">••••••••</span>
-                  <button type="button" class="btn btn-sm btn-outline-secondary reveal-btn" data-id="<%= pw.id %>">👁</button>
+                  <span id="pw-<%= pw.id %>"><%= pw.password %></span>
                 </div>
               </div>
 
               <!-- Actions -->
               <div class="password-actions" style="margin-top:1rem;display:flex;gap:.5rem;">
                 <a href="/edit/<%= pw.id %>" class="btn btn-sm btn-warning">Edit</a>
-                <form method="POST" action="/delete/<%= pw.id %>" onsubmit="return confirm('Are you sure you want to delete this password?')">
+                <form method="POST" action="/delete/<%= pw.id %>" onclick="return confirm('Are you sure you want to delete this password?')">
                   <button class="btn btn-sm btn-danger">Delete</button>
                 </form>
               </div>
@@ -78,29 +76,5 @@
       <% } %>
     </div>
   </div>
-
-  <!-- JS: event delegation; no inline handlers -->
-  <script>
-    // Expand/collapse when clicking anywhere on the card,
-    // but ignore clicks on buttons/links/forms inside.
-    document.addEventListener("click", function (e) {
-      const revealBtn = e.target.closest(".reveal-btn");
-      if (revealBtn) {
-        e.stopPropagation();
-        const id = revealBtn.dataset.id;
-        const span = document.getElementById("pw-" + id);
-        const actual = decodeURIComponent(span.dataset.actual);
-        span.textContent = (span.textContent === "••••••••") ? actual : "••••••••";
-        return;
-      }
-
-      const card = e.target.closest(".password-card");
-      if (card && !e.target.closest("a, button, form, input")) {
-        const id = card.dataset.id;
-        const details = document.getElementById("details-" + id);
-        if (details) details.hidden = !details.hidden;
-      }
-    });
-  </script>
 </body>
 </html>
