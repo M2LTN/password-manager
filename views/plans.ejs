@@ -11,7 +11,7 @@
     <!-- Header -->
     <div class="dashboard-header">
       <h1 class="dashboard-title">Plans & Pricing</h1>
-      <a href="/" class="btn btn-secondary">Go back</a>
+      <a href="/dashboard" class="btn btn-secondary">Go back</a>
     </div>
 
     <section class="plans-section">
@@ -19,37 +19,58 @@
         Choose the plan that fits your needs. Upgrade anytime, your data stays safe and encrypted.
       </p>
 
+      <%
+        // Normalize role so this page behaves even if role isn't passed (e.g., logged out visitors)
+        const currentRole = (typeof role !== "undefined" && role) ? role : null;
+
+        // Outline/highlight the user's current plan.
+        // If role is missing, keep your old behavior: Personal is featured by default.
+        const freeFeatured = currentRole === "free";
+        const personalFeatured = currentRole === "personal" || !currentRole;
+      %>
+
       <div class="plans-grid">
         <!-- Free Plan -->
-        <div class="plan-card">
+        <div class="plan-card <%= freeFeatured ? 'plan-featured' : '' %>
+          <%= currentRole === 'personal' ? 'plan-locked' : '' %>">
           <h2>Free</h2>
-          <p class="plan-price">$0<span>/mo</span></p>
+          <p class="plan-price">€0<span>/mo</span></p>
           <ul class="plan-features">
             <li>🔒 Store up to <strong>5 passwords</strong></li>
             <li>✅ Basic encryption</li>
             <li>🚫 No sharing or backup</li>
           </ul>
-          <a href="/register" class="btn btn-secondary btn-full">Get Started</a>
+
+          <% if (currentRole === "free") { %>
+            <button class="btn btn-secondary btn-full" disabled>Your current plan</button>
+          <% } else { %>
+            <a href="/register" class="btn btn-secondary btn-full">Get Started</a>
+          <% } %>
         </div>
 
         <!-- Personal Plan -->
-        <div class="plan-card plan-featured">
+        <div class="plan-card <%= personalFeatured ? 'plan-featured' : '' %>">
           <h2>Personal</h2>
-          <p class="plan-price">$4.99<span>/mo</span></p>
+          <p class="plan-price">€4.99<span>/mo</span></p>
           <ul class="plan-features">
             <li>🔑 Unlimited password storage</li>
             <li>☁️ Encrypted cloud sync</li>
             <li>📱 Access on any device</li>
             <li>🔔 Breach alerts</li>
           </ul>
-          <button id="purchaseBtn" class="btn btn-primary btn-full">Purchase</button>
-          <script src="/js/payment.js"></script>
+
+          <% if (currentRole === "personal") { %>
+            <button class="btn btn-primary btn-full" disabled>Your current plan</button>
+          <% } else { %>
+            <button id="purchaseBtn" class="btn btn-primary btn-full">Purchase</button>
+            <script src="/js/payment.js"></script>
+          <% } %>
         </div>
 
         <!-- Business Plan -->
         <div class="plan-card">
           <h2>Business</h2>
-          <p class="plan-price">$9.99<span>/user/mo</span></p>
+          <p class="plan-price">€9.99<span>/user/mo</span></p>
           <ul class="plan-features">
             <li>🏢 Team password management</li>
             <li>👥 Role-based access control</li>

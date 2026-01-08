@@ -12,20 +12,23 @@
     <div class="dashboard-header">
       <h1 class="dashboard-title">My Vault</h1>
       <a href="/logout" class="btn btn-danger">Sign Out</a>
-    </div>
+        </div>
 
-    <!-- Plan Status -->
-    <% if (role === "free") { %>
+        <!-- Plan Status -->
+        <% if (role === "free") { %>
       <div class="plan-badge">
-        ⚡ Free Plan: <%= passwords.length %>/5 passwords used
+        Free Plan: <%= passwords.length %>/5 passwords used
       </div>
-    <% } %>
+        <% } else if (role === "personal") { %>
+      <div class="plan-badge">
+        Personal plan: <strong>Unlimited Access</strong>
+      </div>
+        <% } %>
 
-    <a href="/plans" class="btn btn-sm btn-plan">Plans</a>
+        <a href="/plans" class="btn btn-sm btn-plan">Plans</a>
 
-
-    <!-- Add Password Form -->
-    <div class="add-password-card">
+        <!-- Add Password Form -->
+        <div class="add-password-card">
       <h3>Add New Password</h3>
       <form method="POST" action="/add">
         <div class="form-grid">
@@ -35,11 +38,11 @@
         </div>
         <button type="submit" class="btn btn-primary btn-full">Save Password Securely</button>
       </form>
-    </div>
+        </div>
 
-    <!-- Password List -->
-    <div class="passwords-section">
-      <h3 style="margin-bottom:1.5rem;font-size:1.25rem;font-weight:600;">
+        <!-- Password List -->
+        <div class="passwords-section">
+      <h3 style="margin-bottom:1.5rem;font-size:1.25rem;font-weight:600;"></h3>
         Saved Passwords (<%= passwords.length %>)
       </h3>
 
@@ -65,9 +68,12 @@
 
               <!-- Actions -->
               <div class="password-actions" style="margin-top:1rem;display:flex;gap:.5rem;">
+                <!-- Edit password -->
                 <a href="/edit/<%= pw.id %>" class="btn btn-sm btn-warning">Edit</a>
-                <form method="POST" action="/delete/<%= pw.id %>" onclick="return confirm('Are you sure you want to delete this password?')">
-                  <button class="btn btn-sm btn-danger">Delete</button>
+                <!-- Delete password -->
+                <form method="POST" action="/delete/<%= pw.id %>" class="delete-form"
+                      data-confirm="Are you sure you want to delete this password?">
+                  <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                 </form>
               </div>
             </div>
@@ -76,5 +82,6 @@
       <% } %>
     </div>
   </div>
+<script src="/js/confirm-delete.js"></script>
 </body>
 </html>

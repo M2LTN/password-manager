@@ -8,6 +8,9 @@ const routes = require("./routes/index");
 const db = require("./config/db");
 const path = require("path");
 const stripeRoutes = require("./stripe");
+const nodemailer = require("nodemailer");
+const bodyParser = require("body-parser");
+
 
 // ===== APP CONFIGURATION =====
 dotenv.config();
@@ -21,6 +24,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // ===== SESSION STORE =====
 const sessionStore = new MySQLStore({
@@ -42,7 +46,6 @@ app.use(
 // ===== ROUTES =====
 app.use("/", routes);
 app.use("/", stripeRoutes);
-
 // ===== SERVER START =====
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
