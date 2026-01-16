@@ -98,8 +98,14 @@ router.get("/payment/success", async (req, res) => {
             console.warn("⚠️ No user found with id:", userId);
           }
 
-          console.log("User role updated successfully!");
-          res.render("payment-success", { message: "Payment successful! You are now a premium member!" });
+          if (req.session?.user) {
+            req.session.user.role = "personal";
+          }
+
+          req.session.save(() => {
+            console.log("User role updated successfully!");
+            res.render("payment-success", { message: "Payment successful! You are now a premium member!" });
+          });
         }
       );
     } else {
