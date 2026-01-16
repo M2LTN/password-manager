@@ -109,6 +109,7 @@ html {
   text-align: center;
   position: relative;
 }
+
 /* Dashboard Styles */
 .dashboard-container {
   min-height: 100vh;
@@ -130,7 +131,7 @@ html {
   font-size: 2rem;
   font-weight: 600;
   display: flex;
-  position:relative;
+  position: relative;
   align-items: center;
   gap: 0.75rem;
 }
@@ -255,13 +256,18 @@ html {
 
 .btn-back {
   background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
-  position: fixed;         /* stay in place while scrolling */
-  top: 1.5rem;                /* vertically centered */
-  left: 1.5rem;            /* distance from the left edge */
-  z-index: 1000;           /* keep it above everything */
+  position: fixed;
+  /* stay in place while scrolling */
+  top: 1.5rem;
+  /* vertically centered */
+  left: 1.5rem;
+  /* distance from the left edge */
+  z-index: 1000;
+  /* keep it above everything */
   padding: 0.75rem 1.25rem;
   color: white;
 }
+
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 20px rgba(8, 145, 178, 0.3);
@@ -306,11 +312,13 @@ html {
   text-align: center;
   margin-top: 2rem;
 }
+
 .plan-locked {
   opacity: 0.45;
   filter: grayscale(1);
   pointer-events: none;
 }
+
 .plan-locked .btn {
   pointer-events: none;
 }
@@ -449,6 +457,56 @@ html {
   text-align: center;
   display: inline-block;
   transition: background 0.2s ease;
+}
+
+
+.contact-section {
+  max-width: 900px;
+  margin: 3rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.contact-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  flex: 1 1 380px;
+}
+
+.contact-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.contact-item {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.contact-item strong {
+  display: inline-block;
+  width: 90px;
+  color: var(--text-secondary);
+}
+
+.form-input,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
 /* Responsive Design */
