@@ -11,12 +11,13 @@ router.get("/dashboard", requireLogin, (req, res) => {
     const decryptedResults = results.map(p => ({
       ...p,
       password: decrypt(p.password),
-      
+
     }));
     res.render("index", { passwords: decryptedResults, role: req.session.role });
   });
 });
 
+// Free plan error
 router.get("/add_error", requireLogin, (req, res) => {
   res.render("add_error", { role: req.session.role });
 });
